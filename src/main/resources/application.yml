@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate.format_sql: true
+      hibernate.show_sql: false
+
+flyway:
+  enabled: true
+
+server:
+  port: 8080
