@@ -16,3 +16,14 @@ flyway:
 
 server:
   port: 8080
+
+
+springdoc:
+  api-docs:
+    enabled: true
+  paths-to-match: /api/**, /r/**
+
+logging:
+  level:
+    org.springdoc: DEBUG
+    org.springframework.web: INFO

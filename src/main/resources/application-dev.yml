@@ -1,15 +1,60 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:shorty;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
+    url: jdbc:h2:mem:shorty;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
     username: sa
     password:
     driver-class-name: org.h2.Driver
 
   jpa:
+    # keep validation OFF for the first start so Flyway runs first
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
+    properties:
+      hibernate.format_sql: true
+      hibernate.show_sql: false
+    open-in-view: false
 
   h2:
     console:
       enabled: true
       path: /h2-console
+
+  mvc:
+    cors:
+      mappings:
+        "/api/**":
+          allowed-origins:
+            - "http://localhost:5173"
+          allowed-methods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - OPTIONS
+          allowed-headers: "*"
+          allow-credentials: true
+        "/r/**":
+          allowed-origins:
+            - "http://localhost:5173"
+          allowed-methods:
+            - GET
+            - OPTIONS
+          allowed-headers: "*"
+          allow-credentials: true
+        "/v3/**":
+          allowed-origins:
+            - "http://localhost:5173"
+          allowed-methods:
+            - GET
+            - OPTIONS
+          allowed-headers: "*"
+          allow-credentials: true
+
+flyway:
+  enabled: true
+  locations: classpath:db/migration
+
+logging:
+  level:
+    org.flywaydb.core: DEBUG
+    org.hibernate.tool.schema: DEBUG

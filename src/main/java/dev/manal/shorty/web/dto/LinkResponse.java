@@ -1,20 +1,29 @@
 package dev.manal.shorty.web.dto;
 
-import lombok.*;
+import dev.manal.shorty.domain.Link;
+import lombok.Builder;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
 @Builder
-public class LinkResponse {
-    private UUID id;
-    private String code;
-    private String targetUrl;
-    private OffsetDateTime createdAt;
-    private String createdBy;
-
-    // stats (filled later)
-    private Long totalClicks;
+public record LinkResponse(
+        UUID id,
+        String code,
+        String targetUrl,
+        Instant createdAt,
+        String createdBy,
+        long totalClicks
+) {
+    // static factory helper
+    public static LinkResponse from(Link link, long totalClicks) {
+        return LinkResponse.builder()
+                .id(link.getId())
+                .code(link.getCode())
+                .targetUrl(link.getTargetUrl())
+                .createdAt(link.getCreatedAt())
+                .createdBy(link.getCreatedBy())
+                .totalClicks(totalClicks)
+                .build();
+    }
 }
