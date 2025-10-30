@@ -1,2 +1,8 @@
-/mvnw text eol=lf
-*.cmd text eol=crlf
+# Treat frontend as vendored (ignored from language stats)
+frontend/* linguist-vendored
+
+# Ignore generated frontend files from build
+src/main/frontend/generated/* linguist-generated
+
+# Java should now be recognized properly
+*.java linguist-language=Java
