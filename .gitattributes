@@ -4,5 +4,5 @@ frontend/* linguist-vendored
 # Ignore generated frontend files from build
 src/main/frontend/generated/* linguist-generated
 
-# Java should now be recognized properly
+# Force Java recognition
 *.java linguist-language=Java
